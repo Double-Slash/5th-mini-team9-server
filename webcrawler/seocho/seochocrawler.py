@@ -4,6 +4,7 @@ import urllib.parse
 import re
 import requests
 from db import connector
+from datetime import datetime
 
 def req(loc) :
     #move key to enviroment file
@@ -23,11 +24,12 @@ def parser(str) :
             time = re.findall(r"\d+:\d+~[\d+:\d+|\d+]+",x[0])
             name = x[0][x[0].find(" ")+1:]
             (axisx, axisxy) = req(x[1])
-            tmp = [items[current], time[0], name, "서울특별시","서초구", x[1], axisx, axisxy]
+            tmp = [str(datetime.now().year) + items[current], time[0], name, "서울특별시","서초구", x[1], axisx, axisxy]
             result.append(tmp)
             connector.insert(tmp)
         elif len(re.findall(r"\d+/\d+",x[0])) != 0:
             current = idx
+
     return result
 
 
