@@ -24,6 +24,7 @@ def parser(str) :
             time = re.findall(r"\d+:\d+~[\d+:\d+|\d+]+",x[0])
             name = x[0][x[0].find(" ")+1:]
             (axisx, axisxy) = req(x[1])
+            [x,y] = re.split(time[0])
             tmp = [str(datetime.now().year) + items[current], time[0], name, "서울특별시","서초구", x[1], axisx, axisxy]
             result.append(tmp)
             connector.insert(tmp)
